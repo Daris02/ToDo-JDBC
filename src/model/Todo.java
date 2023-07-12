@@ -1,16 +1,16 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Todo {
     private int id;
     private String title;
     private String description;
-    private Date deadline;
+    private LocalDateTime deadline;
     private int priority;
     private boolean done;
     
-    public Todo(int id, String title, String description, Date deadline, int priority, boolean done) {
+    public Todo(int id, String title, String description, LocalDateTime deadline, int priority, boolean done) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -43,11 +43,11 @@ public class Todo {
         this.description = description;
     }
 
-    public Date getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 
@@ -69,7 +69,7 @@ public class Todo {
 
     @Override
     public String toString() {
-        return "Todo [id=" + id + ", title=" + title + ", description=" + description + ", deadline=" + deadline
+        return "Todo [id=" + id + ", title=" + title + ", description=" + description + ", deadline=" + deadline.toString().replace("T", " ")
                 + ", priority=" + priority + ", done=" + done + "]";
     }
 

@@ -3,6 +3,8 @@ package databaseconnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import model.Settings;
+
 public class ConnectionDB {
     private static String databaseName = "jdbc:postgresql://localhost/" + Settings.DATABASE_NAME;
     private static String user = Settings.USER;

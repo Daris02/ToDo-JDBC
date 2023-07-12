@@ -34,7 +34,7 @@ public class Interface {
                     System.out.println("Au revoir !");
                     break;
                 case 4:
-                    Todo inserer = Fonctionnement.Inseretion(Insert);
+                   // Todo inserer = Fonctionnement.Inseretion(Insert);
                     System.out.println("");
                     break;
                 case 5:

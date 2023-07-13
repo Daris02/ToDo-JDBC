@@ -89,24 +89,19 @@ public class Interface {
         scanner.nextLine();
 
         System.out.println("Enter new title : ");
-        String newTitle = scanner.next();
-        scanner.nextLine();
+        String newTitle = scanner.nextLine();
         
         System.out.println("Enter new description : ");
-        String newDescription = scanner.next();
-        scanner.nextLine();
+        String newDescription = scanner.nextLine();
         
         System.out.println("Enter new deadline : ");
-        String newDeadline = scanner.next();
-        scanner.nextLine();
+        String newDeadline = scanner.nextLine();
         
         System.out.println("Enter new priority : ");
-        int newPriority = scanner.next();
-        scanner.nextLine();
+        int newPriority = scanner.nextLine();
         
         System.out.println("Enter new done : ");
-        int newDone = scanner.next();
-        scanner.nextLine();
+        int newDone = scanner.nextInt();
         
         Todo taskU = TodoCRUD.findTaskById(_id);
         TodoCRUD.updateTaskById(_id, newTitle, newDescription, newDeadline, newPriority, newDone);

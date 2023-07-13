@@ -14,7 +14,7 @@ import model.Todo;
 public class TodoCRUD {
     // Find all task
     public static List<Todo> findAllTasks() {
-        String sql = "SELECT * FROM \"todo\";";
+        String sql = "SELECT * FROM \"todo\" ORDER BY priority DESC;";
 
         List<Todo> allTasks = new ArrayList<>(0);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

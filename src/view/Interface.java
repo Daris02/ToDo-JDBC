@@ -7,9 +7,9 @@ import model.Todo;
 import repository.TodoCRUD;
 
 public class Interface {
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void launchApp() {
-        Scanner scanner = new Scanner(System.in);
         int choix = 0;
 
         while (choix != 6) {
@@ -26,63 +26,120 @@ public class Interface {
 
             switch (choix) {
                 case 1:
-                // Ajoutez votre logique pour l'option 1 ici
-                System.out.println("All todos --");
-                    List<Todo> allTodo = TodoCRUD.findAllTasks();
-                    for (Todo task : allTodo) {
-                        System.out.println(task.getId() + ". Title: " + task.getTitle() + "\n\tDescription: "
-                                + task.getDescription() + "\n\tDeadline: " + task.getDeadline().toString().replace("T", " ") + "\n\tPriority: "
-                                + task.getPriority() + "\n\tDone: " + task.isDone());
-                    }
+                    getAllTodos();
                     break;
-
                 case 2:
-                    // For find a task by id
-                    System.out.println("Find a task -- ");
+                    findTodo();
                     break;
                 case 3:
-                    // Update a task
-                    System.out.println("Update task -- ");
+                    updateTodo();
                     break;
-
                 case 4:
-                    // Add new task
-                    System.out.println("Add new task -- \n"
-                        +"new Title : ");
-                    String newTitle = scanner.next();
-                    scanner.nextLine();
-                    
-                    System.out.println("new Description : ");
-                    String newDescription = scanner.nextLine();
-                    
-                    System.out.println("new Deadline (yyyy-MM-dd HH:mm:ss) : ");
-                    String newDeadline = scanner.nextLine();
-                    
-                    System.out.println("new Priority (Number) : ");
-                    int newPriority = scanner.nextInt();
-
-                    System.out.println(newTitle +" "+ newDescription +" "+ newDeadline +" "+ newPriority);
-
-                    TodoCRUD.addTask(newTitle, newDescription, newDeadline, newPriority);
+                    addTodo();
                     break;
-
                 case 5:
-                    // Delete a task
-                    System.out.println("Delete a task -- \n"
-                        + "Enter number of task you want to delete : ");
-                    int _id = scanner.nextInt();
-
-                    Todo taskD = TodoCRUD.findTaskById(_id);
-                    TodoCRUD.deleteTaskById(_id);
-                    System.out.println("Delete : " + taskD.getTitle());
+                    deleteTodo();
                     break;
-
+                case 6:
+                    // Quit
+                    choix = 6;
+                    System.out.println("Bye !!!");
+                    break;
                 default:
                     System.out.println("Option invalide, veuillez réessayer.");
                     break;
             }
-            System.out.println();
         }
         scanner.close();
+    }
+
+    // Get all tasks
+    private static void getAllTodos() {
+        System.out.println("All todos --");
+        
+        List<Todo> allTodo = TodoCRUD.findAllTasks();
+        for (Todo task : allTodo) {
+            System.out.println(task.getId() + ". Title: " + task.getTitle() + "\n\tDescription: "
+                    + task.getDescription() + "\n\tDeadline: " + task.getDeadline().toString().replace("T", " ") + "\n\tPriority: "
+                    + task.getPriority() + "\n\tDone: " + task.isDone());
+        }
+    }
+
+    // For find a task
+    private static void findTodo() {
+        System.out.println("Find a task -- \n" 
+            + "Search : ");
+        String search = scanner.next();
+
+        List<Todo> allTasks = TodoCRUD.findAllTasks();
+        for (Todo task : allTasks) {
+            if (task.getTitle().toUpperCase().contains(search.toUpperCase()) || task.getDescription().toUpperCase().contains(search.toUpperCase())) {
+                System.out.println(task.getId() + ". Title: " + task.getTitle() + "\n\tDescription: "
+                    + task.getDescription() + "\n\tDeadline: " + task.getDeadline().toString().replace("T", " ") + "\n\tPriority: "
+                    + task.getPriority() + "\n\tDone: " + task.isDone());
+            }
+        }
+    }
+
+    // Update a task
+    private static void updateTodo() {
+        System.out.println("Update task --\n"
+            + "Enter number of to do : ");
+        int _id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Enter new title : ");
+        String newTitle = scanner.next();
+        scanner.nextLine();
+        
+        System.out.println("Enter new description : ");
+        String newDescription = scanner.next();
+        scanner.nextLine();
+        
+        System.out.println("Enter new deadline : ");
+        String newDeadline = scanner.next();
+        scanner.nextLine();
+        
+        System.out.println("Enter new priority : ");
+        int newPriority = scanner.next();
+        scanner.nextLine();
+        
+        System.out.println("Enter new done : ");
+        int newDone = scanner.next();
+        scanner.nextLine();
+        
+        Todo taskU = TodoCRUD.findTaskById(_id);
+        TodoCRUD.updateTaskById(_id, newTitle, newDescription, newDeadline, newPriority, newDone);
+        System.out.println("Task with id : " + taskU.getId() + " is updated successfuly.");
+    }
+
+    // Add new task
+    private static void addTodo() {
+        System.out.println("Add new task -- \n"
+            +"new Title : ");
+        String newTitle = scanner.next();
+        scanner.nextLine();
+        
+        System.out.println("new Description : ");
+        String newDescription = scanner.nextLine();
+        
+        System.out.println("new Deadline (yyyy-MM-dd HH:mm:ss) : ");
+        String newDeadline = scanner.nextLine();
+        
+        System.out.println("new Priority (Number) : ");
+        int newPriority = scanner.nextInt();
+
+        TodoCRUD.addTask(newTitle, newDescription, newDeadline, newPriority);
+    }
+
+    // Delete a task
+    private static void deleteTodo() {
+        System.out.println("Delete a task -- \n"
+            + "Enter number of task you want to delete : ");
+        int _id = scanner.nextInt();
+
+        Todo taskD = TodoCRUD.findTaskById(_id);
+        TodoCRUD.deleteTaskById(_id);
+        System.out.println("Delete : " + taskD.getTitle());
     }
 }

@@ -1,6 +1,6 @@
 .vscode/
 .idea/
-/bin
+/bin/*
 /lib
 /out
 ToDo-JDBC.iml

@@ -31,7 +31,8 @@ public class TodoCRUD {
                         resultSet.getString("description"),
                         LocalDateTime.parse(str, formatter),
                         resultSet.getInt("priority"),
-                        resultSet.getBoolean("done")));
+                        resultSet.getBoolean("done"))
+                    );
             }
             return allTasks;
 

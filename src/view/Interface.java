@@ -84,7 +84,7 @@ public class Interface {
     // Update a task
     private static void updateTodo() {
         System.out.println("Update task --\n"
-            + "Enter number of to do : ");
+            + "Enter number (id) of to do : ");
         int _id = scanner.nextInt();
         scanner.nextLine();
 
@@ -98,10 +98,10 @@ public class Interface {
         String newDeadline = scanner.nextLine();
         
         System.out.println("Enter new priority : ");
-        int newPriority = scanner.nextLine();
+        int newPriority = scanner.nextInt();
         
         System.out.println("Enter new done : ");
-        int newDone = scanner.nextInt();
+        boolean newDone = scanner.nextBoolean();
         
         Todo taskU = TodoCRUD.findTaskById(_id);
         TodoCRUD.updateTaskById(_id, newTitle, newDescription, newDeadline, newPriority, newDone);
@@ -118,7 +118,7 @@ public class Interface {
         System.out.println("new Description : ");
         String newDescription = scanner.nextLine();
         
-        System.out.println("new Deadline (yyyy-MM-dd HH:mm:ss) : ");
+        System.out.println("new Deadline (yyyy-MM-dd HH:mm) : ");
         String newDeadline = scanner.nextLine();
         
         System.out.println("new Priority (Number) : ");
